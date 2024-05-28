@@ -76,22 +76,22 @@ server.put("/users/:id", (req,res)=>{
 })
 
 // Deletar usuário
-server.delete('/users/:id', (req, res) => {
-    const { id } = req.params;
-    const query = 'DELETE FROM users WHERE id = ?';
-    db.query(query, [id], (err, result) => {
-      if (err) {
-        console.error('Erro ao deletar usuário:', err);
-        res.status(500).send('Erro ao deletar usuário');
-        return;
-      }
-      if (result.affectedRows === 0) {
-        res.status(404).send('Usuário não encontrado');
-        return;
-      }
-      res.send('Usuário deletado com sucesso');
-    });
-  });
+server.delete("/users/:id", (req,res)=>{
+    const { id } = req.params
+    const query = "DELETE FROM usuarios WHERE id = ?"
+    db.query(query, [id], (err,result)=>{
+        if(err){
+            console.log("Erro ao deletar o usuário: " + err)
+            res.status(500).send("Erro ao deletar usuário")
+            return
+        }
+        if(result.affectedRows === 0){
+            res.status(404).send("Usuário não encontrado")
+            return
+        }
+        res.send("Usuário deletado com sucesso")
+    })
+})
 
 
 server.listen(port, ()=>{
